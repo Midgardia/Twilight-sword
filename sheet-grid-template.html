@@ -8,7 +8,7 @@
     <label>Name: <input name="attr_character_name" type="text"></label>
     <label>Way: <input name="attr_class" list="class" type="text" ></label>
     <label>Kin: <input name="attr_race" type="text" ></label>
-    <label>Origin: <input type="number" name="attr_hp" value="20"> / <input type="number" name="attr_hp_max" value="20"></label>
+    <label>Origin: <input type="number" name="attr_hp" value="15"> / <input type="number" name="attr_hp_max" value="15"></label>
   </section>
 
   <section class="skill f-col nowrap">
@@ -16,7 +16,7 @@
     <div class="f-row nowrap">
       <label>Strength</label>
       <input type="number" name="attr_Strength" value="3">
-      <button type="roll" name="roll_Strength" value="&{template:rolls} {{title=Strength}} {{subtitle=@{character_name} }} {{roll= [[d12+@{Strength}[Strength] ]]}}"> </button>
+      <button type="roll" name="roll_Strength" value="&{template:rolls} {{title=Strength}} {{subtitle=@{character_name} }} {{roll= [[d12]] ≤ [[@{Strength}[Strength]]]}}"> </button>
     </div>
     <div class="f-row nowrap">
       <label>Mind</label>
