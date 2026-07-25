@@ -8,7 +8,8 @@
     <label>Name: <input name="attr_character_name" type="text"></label>
     <label>Way: <input name="attr_class" list="class" type="text" ></label>
     <label>Kin: <input name="attr_race" type="text" ></label>
-    <label>Origin: <input type="number" name="attr_hp" value="15"> / <input type="number" name="attr_hp_max" value="15"></label>
+    <label>Heart: <input type="number" name="attr_Heart" value="15"> / <input type="number" name="attr_Heart_max" value="15"></label>
+    <label>Stamina: <input type="number" name="attr_Stamina" value="15"> / <input type="number" name="attr_Stamina_max" value="15"></label>
   </section>
 
   <section class="skill f-col nowrap">
@@ -16,41 +17,45 @@
     <div class="f-row nowrap">
       <label>Strength</label>
       <input type="number" name="attr_Strength" value="3">
-      <button type="roll" name="roll_Strength" value="&{template:rolls} {{title=Strength}} {{subtitle=@{character_name} }} {{roll= [[1d12]] ≤ @{Strength}[Strength]}}"> </button>
+      <button type="roll" name="roll_Strength" value="&{template:rolls} {{title=Strength}} {{subtitle=@{character_name} }} {{roll= [[1d12cs1cf12]] ≤ @{Strength}}}"> </button>
     </div>
     <div class="f-row nowrap">
-      <label>Mind</label>
-      <input type="number" name="attr_mind" value="3">
-      <button type="roll" name="roll_mind" value="&{template:rolls} {{title=Mind}} {{subtitle=@{character_name} }} {{roll= [[d20+@{mind}[mind] ]]}}"> </button>
+      <label>Agility</label>
+      <input type="number" name="attr_Agility" value="3">
+      <button type="roll" name="roll_Agility" value="&{template:rolls} {{title=Agility}} {{subtitle=@{character_name} }} {{roll= [[1d12cs1cf12]] ≤ @{Agility}}}"> </button>
     </div>
     <div class="f-row nowrap">
-      <label>Soul</label>
-      <input type="number" name="attr_soul" value="3">
-      <button type="roll" name="roll_soul" value="&{template:rolls} {{title=Soul}} {{subtitle=@{character_name} }} {{roll= [[d20+@{soul}[soul] ]]}}"> </button>
+      <label>Vitality</label>
+      <input type="number" name="attr_Vitality" value="3">
+      <button type="roll" name="roll_Vitality" value="&{template:rolls} {{title=Vitality}} {{subtitle=@{character_name} }} {{roll= [[1d12cs1cf12]] ≤ @{Vitality}}}"> </button>
+    </div>
+    <div class="f-row nowrap">
+      <label>Perception</label>
+      <input type="number" name="attr_Perception" value="3">
+      <button type="roll" name="roll_Perception" value="&{template:rolls} {{title=Perception}} {{subtitle=@{character_name} }} {{roll= [[1d12cs1cf12]] ≤ @{Perception}}}"> </button>
+    </div>
+    <div class="f-row nowrap">
+      <label>Will</label>
+      <input type="number" name="attr_Will" value="3">
+      <button type="roll" name="roll_Will" value="&{template:rolls} {{title=Will}} {{subtitle=@{character_name} }} {{roll= [[1d12cs1cf12]] ≤ @{Will}}}"> </button>
+    </div>
+    <div class="f-row nowrap">
+      <label>Knowledge</label>
+      <input type="number" name="attr_Knowledge" value="3">
+      <button type="roll" name="roll_Knowledge" value="&{template:rolls} {{title=Knowledge}} {{subtitle=@{character_name} }} {{roll= [[1d12cs1cf12]] ≤ @{Knowledge}}}"> </button>
+    </div>
+    <div class="f-row nowrap">
+      <label>Charisma</label>
+      <input type="number" name="attr_Charisma" value="3">
+      <button type="roll" name="roll_Charisma" value="&{template:rolls} {{title=Charisma}} {{subtitle=@{character_name} }} {{roll= [[1d12cs1cf12]] ≤ @{Charisma}}}"> </button>
+    </div>
+    <div class="f-row nowrap">
+      <label>Stealth</label>
+      <input type="number" name="attr_Stealth" value="3">
+      <button type="roll" name="roll_Stealth" value="&{template:rolls} {{title=Stealth}} {{subtitle=@{character_name} }} {{roll= [[1d12cs1cf12]] ≤ @{Stealth}}}"> </button>
     </div>
 
-    <h3>Skills</h3>
-    <div class="f-col nowrap">
-      <label>Initiative </label>
-      <div class="f-row nowrap">
-        <input type="number" name="attr_init" value="0">
-        <button type="roll" name="roll_init" value="&{template:rolls} {{title=Initiative}} {{subtitle=@{character_name} }} {{roll= [[d20+(@{init}[init]) &{tracker}]]}}"> </button>
-      </div>
-    </div>
-    <div class="f-col nowrap">
-      <label>Stealth </label>
-      <div class="f-row nowrap">
-        <input type="number" name="attr_stealth" value="0">
-        <button type="roll" name="roll_stealth" value="&{template:rolls} {{title=Stealth}} {{subtitle=@{character_name} }} {{roll= [[d20+(@{stealth}[stealth]) ]]}}"> </button>
-      </div>
-    </div>
-    <div class="f-col nowrap">
-      <label>Grapple </label>
-      <div class="f-row nowrap">
-        <input type="number" name="attr_grapple" value="0">
-        <button type="roll" name="roll_grapple" value="&{template:rolls} {{title=Grapple}} {{subtitle=@{character_name} }} {{roll= [[d20+(@{body}[body])+(@{grapple}[grapple]) ]]}}"> </button>
-      </div>
-    </div>   
+
   </section>
 
   <section class="power f-col">
