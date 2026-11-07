@@ -1,132 +1,274 @@
+/*----------------- PARCHMENT & INK THEME DEFINITIONS ------------------*/
+:root {
+  --tbrown: #D07B43;
+  --tblue: #D3E0E4;
+  --twhite: #FDF7EF;   /* Parchment Base */
+  --tcopper: #A0815F;  /* Ink Accent */
+  --tpink: #E7D9D2;
+  --tink: #2C2520;     /* Dark Charcoal/Brown Ink */
+}
 
 /*----------------- Main Layout ------------------*/
-
-/* A CSS Grid example using "grid-template-areas"
-  https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
-*/
 main {
   display: grid;
-  width: 800px;
-  height: 900px;
-  grid-gap: 4px;
-  grid-template-columns: 160px 1fr 1fr 1fr;
-  grid-template-rows: 90px 1fr 1fr 1fr 20px;
-  grid-template-areas:"header header  header  header"
-                      "skill  common  common  power"
-                      "skill  attack  inv     power"
-                      "misc   misc    inv     power"
-                      "footer footer  footer  footer";
+  width: 100%;
+  min-height: 1000px; /* Changed height to allow dynamic scaling */
+  grid-gap: 12px;     /* Increased spacing for an airy, minimalist look */
+  grid-template-columns: 230px auto auto;
+  grid-template-rows: auto auto auto auto auto; /* Auto rows prevent layout overlap */
+  grid-template-areas:
+    "header header  header"
+    "skill  common  token"
+    "misc   feat    power"
+    "misc   inv     forage"
+    "footer footer  footer";
+  background-color: var(--twhite);
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 /*----------------- GENERAL CSS ------------------*/
-
 section {
-    padding: 5px;
-    border-style: solid;
+  padding: 14px;
+  background-color: var(--twhite);
+  border: 1px solid var(--tcopper);
+  border-radius: 4px; /* Soft edges for paper look */
+  box-sizing: border-box;
 }
 
-/* CSS Flexbox styling, used for adjusting how content inside section behaves */
-.f-col {
-  display: flex;
-  flex-direction: column;
+/* Flexbox Helpers */
+.f-col    { display: flex; flex-direction: column; }
+.f-row    { display: flex; flex-direction: row; align-items: center; }
+.wrap     { display: flex; flex-wrap: wrap; }
+.nowrap   { display: flex; flex-wrap: nowrap; }
+.f-center { align-items: center; justify-content: center; }
+
+/*----------------- Text & Input Styling -----------------*/
+@import url("https://googleapis.com");
+
+.charsheet * {
+  font-family: "Lexend", sans-serif;
+  color: var(--tink);
+  box-sizing: border-box;
 }
-.f-row {
-  display: flex;
-  flex-direction: row;
+
+.charsheet h1 {
+  font-weight: 600;
+  color: var(--tbrown);
+  letter-spacing: 1px;
+  margin: 0;
 }
-.wrap {
-  display: flex;
-  flex-wrap: wrap;
+
+.charsheet h3, .charsheet h4 {
+  text-align: center;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--tcopper);
+  margin-top: 0;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed var(--tcopper);
+  padding-bottom: 4px;
 }
-.nowrap {
-  display: flex;
-  flex-wrap: nowrap;
+
+.charsheet label {
+  margin: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tink) !important; /* Overwrote previous #fff styling */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
-.f-center {
+
+/* Ink & Quill Styled Inputs */
+.charsheet input[type="text"], 
+.charsheet input[type="number"],
+.charsheet select {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--tcopper);
+  padding: 2px 4px;
+  font-size: 13px;
+  color: var(--tink);
+  border-radius: 0;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.charsheet input:focus, 
+.charsheet select:focus {
+  outline: none;
+  border-bottom: 2px solid var(--tbrown);
+}
+
+.charsheet input[type="number"] {
+  text-align: center;
+  width: 45px;
+}
+
+.charsheet textarea {
+  width: 100%;
+  height: 80px;
+  background: rgba(208, 123, 67, 0.03); /* Subtle hint of brown tint */
+  border: 1px solid var(--tcopper);
+  border-radius: 4px;
+  padding: 6px;
+  resize: vertical;
+}
+
+.charsheet .misc textarea {
+    height: 90% !important;
+}
+
+/* Roll20 D20 Button Styling Override */
+.charsheet button[type="roll"] {
+  background: transparent;
+  border: 1px solid var(--tcopper);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-
-/*----------------- Text & Input styling -----------------*/
-
-@import url("https://fonts.googleapis.com/css?family=Lexend&display=swap");
-
-
-/* these are for overwriting default CSS that comes from Roll20 */
-
-.charsheet * {
-  font-family: "Lexend";
+.charsheet button[type="roll"]:hover {
+  background-color: var(--tpink);
+  border-color: var(--tbrown);
 }
 
-.charsheet h3{
-  text-align: center;
-}
-.charsheet label{
-  margin: 3px;
-  padding: 3px 0 0 0;
-}
-
-.charsheet input[type="text"], input[type="number"]{
-  margin: 2px 4px;
-}
-
-.charsheet textarea {
-  width: 95%;
-  height: 85%;
-}
-
-/*------------- Section-specific CSS -------------*/
-
+/*------------- Section-Specific Layout Refinement -------------*/
 .header {
   grid-area: header;
-  background-color: olive;
-  flex-direction: column;
+  border: 2px solid var(--tbrown);
+  padding: 16px;
+  display: flex;
+  flex-direction: row !important; /* Forces layout left-to-right */
+  justify-content: space-between;
+  align-items: center;
 }
 
-.skill {
-  grid-area: skill;
-  background-color: orange;
-  justify-content: space-evenly;
+.header .rightside label {
+  font-size: 16px;
+}
+.header .rightside input {
+  font-size: 18px;
+  width: 60px;
+  font-weight: bold;
+  color: var(--tbrown);
 }
 
 .common {
   grid-area: common;
-  background-color: brown;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
 }
 
-.power {
-  grid-area: power;
-  background-color: coral;
+.common label {
+  flex: 1 1 160px; /* Responsive calculation wrapper */
+}
+.common input[type="text"] {
+  width: 100%;
 }
 
-.power .repcontainer[data-groupname="repeating_power"]{
-  padding-bottom: 0.2em;
+.skill {
+  grid-area: skill;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.power .repcontainer[data-groupname="repeating_power"] .repitem{
-  margin: 4px 0px;
+.skill .f-row {
+  justify-content: space-between;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background-color: rgba(160, 129, 95, 0.06); /* Ultra light ink tint */
+}
+.skill label {
+  width: 90px;
 }
 
-.attack {
-  grid-area: attack;
-  background-color: green;
+.power, .attack, .inv {
+  overflow: visible; /* Prevents ugly Roll20 nested scrollbars */
 }
 
-.inv {
-  grid-area: inv;
-  background-color: grey;
+/* Repeating Details Formatting */
+details {
+  border: 1px solid var(--tblue);
+  background: #fff;
+  margin-bottom: 6px;
+  border-radius: 4px;
 }
+
+summary {
+  padding: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+details[open] summary {
+  border-bottom: 1px dashed var(--tblue);
+}
+
+/* Currency Settings */
+.inv h4 { margin-top: 15px; }
+.inv label[for*="zin"] { font-weight: bold; }
+.inv label[for="attr_red_zin"] { color: #b91c1c !important; }
+.inv label[for="attr_blue_zin"] { color: #1d4ed8 !important; }
+.inv label[for="attr_green_zin"] { color: #15803d !important; }
 
 .misc {
   grid-area: misc;
-  background-color: chocolate;
 }
 
 footer {
   grid-area: footer;
-  background-color: lightgray;
+  border: none;
+  font-size: 11px;
+  color: var(--tcopper);
+  opacity: 0.8;
 }
+/*------------- Balanced Horizontal Initiative Styling -------------*/
+.charsheet .initiative-block {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--tcopper);
+}
+
+.charsheet .init-inline-controls {
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.charsheet .init-inline-controls label {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.charsheet .init-inline-controls select {
+  width: 90px;
+  font-size: 11px;
+}
+
+.charsheet .init-inline-controls .init-mod-lbl input[type="number"] {
+  width: 32px;
+}
+
+.charsheet .init-inline-controls button[type="roll"] {
+  flex-shrink: 0;
+  margin-left: auto; /* Pushes the dice icon neatly to the right margin */
+}
+
 
 /*------------------------------------*\
   #ROLL TEMPLATES
@@ -136,11 +278,11 @@ footer {
   font-family: "Lexend";
 }
 .sheet-rolltemplate-rolls .sheet-container {
-  border: 3px solid black;
+  border: 3px solid;
   border-radius: 3px;
 }
 .sheet-rolltemplate-rolls .sheet-header {
-  background-color: var(--header-bg-color, #a83521);
+  background-color: var(--header-bg-color, #D07B43ff);
   color: var(--header-text-color, #FFF);
   text-align: left;
   text-transform: capitalize;
@@ -156,7 +298,7 @@ footer {
   font-size: 1em;
 }
 .sheet-rolltemplate-rolls .sheet-container {
-  --header-bg-color: #a83521;
+  --header-bg-color: #D07B43ff;
   --header-text-color: #FFF;
 }
 
@@ -165,6 +307,7 @@ footer {
   background: #FFF;
   grid-template-columns: auto auto;
   line-height: 1.4em;
+  color: black;
 }
 .sheet-rolltemplate-rolls .sheet-content > div {
   padding: 5px;
@@ -177,4 +320,8 @@ footer {
 .sheet-rolltemplate-rolls .sheet-content :nth-child(4n+3),
 .sheet-rolltemplate-rolls .sheet-content :nth-child(4n) {
   background: #EEE;
+}
+.sheet-rolltemplate-rolls .inlinerollresult {
+    background: #e7d9d2 !important;
+    color: #000 !important;
 }
