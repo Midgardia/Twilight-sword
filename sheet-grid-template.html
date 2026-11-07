@@ -1,19 +1,51 @@
 <main>
   <section class="header f-center">
+    <div class="rightside">
+        <label>Hope: <input type="number" name="attr_Hope" value="0"></label>
+    </div>
     <h1>Twilight Sword</h1>
-    <span>Character Sheet</span>
   </section>
 
   <section class="common">
     <label>Name: <input name="attr_character_name" type="text"></label>
     <label>Way: <input name="attr_class" list="class" type="text" ></label>
     <label>Kin: <input name="attr_race" type="text" ></label>
+    <label>Origin: <input name="attr_origin" type="text" ></label>
+    <label>Age: <input name="attr_age" type="text" ></label>
+  </section>
+  
+  <section class="token f-col">
     <label>Heart: <input type="number" name="attr_Heart" value="15"> / <input type="number" name="attr_Heart_max" value="15"></label>
-    <label>Stamina: <input type="number" name="attr_Stamina" value="15"> / <input type="number" name="attr_Stamina_max" value="15"></label>
+    <label>Stamina: <input type="number" name="attr_Stamina" value="3"> / <input type="number" name="attr_Stamina_max" value="3"></label>
+    <label>Shield: <input type="number" name="attr_Shield" value="0"></label>
+    <label>Boon <input type="checkbox" name="attr_boon"></label>
+    
+    <!-- Simplified Native Initiative Block -->
+    <div class="initiative-block f-col">
+      <h3>Initiative</h3>
+      
+      <div class="f-row nowrap init-inline-controls">
+        <label>Type: 
+          <select name="attr_init_type">
+            <option value="1d12">Normal</option>
+            <option value="2d12kl1">Boon (Keep Low)</option>
+            <option value="2d12kh1">Bane (Keep High)</option>
+          </select>
+        </label>
+        
+        <label class="init-mod-lbl">Mod: <input type="number" name="attr_init_mod" value="0"></label>
+        
+        <!-- Native Roll: Appends the &{tracker} inside the formula for perfect sync & yellow hover tooltips -->
+        <button type="roll" name="roll_Initiative" value="&{template:rolls} {{title=Initiative Roll}} {{subtitle=@{character_name}}} {{Final Result=[[ @{init_type} + @{init_mod} &{tracker} ]]}}"></button>
+      </div>
+    </div>
   </section>
 
+
+
+
+
   <section class="skill f-col nowrap">
-    <h3>Attributes</h3>
     <div class="f-row nowrap">
       <label>Strength</label>
       <input type="number" name="attr_Strength" value="3">
@@ -59,38 +91,117 @@
   </section>
 
   <section class="power f-col">
-    <h3>Powers</h3>
-    <fieldset class="repeating_power">
-        <input name="attr_power" type="text" >
+    <h3>Feats and Spells</h3>
+    <fieldset class="repeating_feat">
+        <details><summary>
+        <div class="f-row nowrap">
+            <button type="roll" name="attr_feat_roll" value="&{template:rolls} {{title=@{feat_name}}} {{subtitle=@{character_name} }} {{desc= @{feat_text}}}"> </button>
+            ▼ 
+            <input name="attr_feat_name" type="text" >
+        </div></summary>
+        <textarea name="attr_feat_text"></textarea></details>
     </fieldset>
   </section>
 
   <section class="attack">
-    <h3>Attacks</h3>
-    <textarea name="attr_attacks"></textarea>
+    <h3>Equipment (Attacks)</h3>
+    <fieldset class="repeating_attk">
+        <details>
+        <summary>
+            <div class="f-row nowrap">
+                <button type="roll" name="attr_attk_roll" value="&{template:rolls} {{title=@{attk_name}}} {{subtitle=@{character_name} }} {{Range= @{attk_range}}} {{To hit= [[1d12cs1cf12]] ≤ @{attk_skill}}} {{Damage= [[@{attk_die}]]}} {{desc= @{attk_text}}}"> </button>
+                ▼ <input name="attr_attk_name" type="text" >
+            </div>
+        </summary>
+        <div class="f-row nowrap">
+            <label>Range:</label><input name="attr_attk_range" type="text" >
+        </div>
+        <div class="f-row nowrap">
+            <label>Dmg Die:</label><input id="attr_attk_die" name="attr_attk_die" type="text">
+        </div>
+        <div class="f-row nowrap">
+            <label for="attr_attk_skill">Skill:</label>
+            <select id="attr_attk_skill" name="attr_attk_skill">
+                <option value="@{Strength}">Strength</option>
+                <option value="@{Agility}">Agility</option>
+                <option value="@{Vitality}">Vitality</option>
+                <option value="@{Perception}">Perception</option>
+                <option value="@{Will}">Will</option>
+                <option value="@{Knowledge}">Knowledge</option>
+                <option value="@{Charisma}">Charisma</option>
+                <option value="@{Stealth}">Stealth</option>
+            </select>
+        </div>
+        <textarea name="attr_attk_text"></textarea></details>
+    </fieldset>
   </section>
-
+  
   <section class="inv">
     <h3>Inventory</h3>
-    <textarea name="attr_inventory"></textarea>
+    <label>Slots: <input type="number" name="attr_inv" value="(@{invslot}+@{invslot2})" /> / <input type="number" name="attr_inv_max" value="(@{Strength}*2)" disabled="true" /></label>
+    <fieldset class="repeating_inv">
+        <div class="f-row nowrap">
+            <input type="number" name='attr_invslot' value='1'>
+            <input name="attr_inv_name" type="text" >
+        </div>
+    </fieldset>
+    <h4>Zin</h4>
+    <div class="f-row nowrap">
+        <label for="attr_red_zin">R:</label> <input name="attr_red_zin" type="number" value="0">
+        <label for="attr_blue_zin">B:</label> <input name="attr_blue_zin" type="number" value="0">
+        <label for="attr_green_zin">G:</label> <input name="attr_green_zin" type="number" value="0">
+        
+    </div>
+  </section>
+  
+    <section class="forage">
+    <h3>Cooking & Brewing Mats</h3>
+    
+    <fieldset class="repeating_inv2">
+        <div class="f-row nowrap">
+            <input type="number" name='attr_inv2slot' value='1'>
+            <input name="attr_inv2_name" type="text" >
+        </div>
+    </fieldset>
   </section>
 
   <section class="misc">
-    <h3>Physical Description</h3>
+    <h3>Extra info</h3>
     <textarea name="attr_description"></textarea>
   </section>
 
   <footer class="f-col f-center">
-    <span>Generic copyright disclaimer</span>
+    <span>Sheet still in development. Created by @MidgardiaRPG.</span>
   </footer>
 </main>
 
 <!-- Datalists & thing that don't show directly on sheet -->
 
 <datalist id="class">
-    <option value="Fighter">Fighter</option>
-    <option value="Mage">Mage</option>
-    <option value="Expert">Expert</option>
+    <option value="Blade">Blade</option>
+    <option value="Magic">Magic</option>
+    <option value="Light">Light</option>
+    <option value="Wild">Wild</option>
+    <option value="Shadow">Shadow</option>
+    <option value="Song">Song</option>
+</datalist>
+
+<datalist id="skill">
+    <option value="Strength">Strength</option>
+    <option value="Agility">Agility</option>
+    <option value="Vitality">Vitality</option>
+    <option value="Perception">Perception</option>
+    <option value="Will">Will</option>
+    <option value="Knowledge">Knowledge</option>
+    <option value="Charisma">Charisma</option>
+    <option value="Stealth">Stealth</option>
+</datalist>
+
+<datalist id="die">
+    <option value="d4">d4</option>
+    <option value="d6">d6</option>
+    <option value="d8">d8</option>
+    <option value="d10">d10</option>
 </datalist>
 
 <!-- roll template -->
